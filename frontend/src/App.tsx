@@ -273,12 +273,12 @@ const App: React.FC = () => {
               <h3 className="text-xs uppercase font-bold text-slate-800 tracking-wider">Légende des tracés</h3>
               <div className="flex flex-col gap-3 text-sm text-slate-700">
                 <div className="flex items-center gap-3"><div className="w-8 h-1.5 bg-pink-500 rounded-full"></div> <span className="font-medium">Sentier balisé (GR/PR)</span></div>
-                <div className="flex items-center gap-3"><div className="w-8 h-1.5 bg-[#8b5cf6] rounded-full border-dashed border-t-2 border-white"></div> <span className="font-medium">Piste agricole / forestière</span></div>
+                <div className="flex items-center gap-3"><div className="w-8 h-1.5 bg-[#8b5cf6] rounded-full border-dashed border-t-2 border-white"></div> <span className="font-medium">Chemin large (piste)</span></div>
                 <div className="flex items-center gap-3"><div className="w-8 h-1.5 bg-[#3b82f6] rounded-full"></div> <span className="font-medium">Petit chemin ordinaire</span></div>
                 <div className="flex items-center gap-3"><div className="w-6 h-6 bg-[#15803d] opacity-50 rounded border border-[#14532d]"></div> <span className="font-medium">Forêt / Bois traversable</span></div>
                 <div className="flex items-center gap-3"><div className="w-6 h-6 bg-[#84cc16] opacity-50 rounded border border-[#4d7c0f]"></div> <span className="font-medium">Prairie / Zone ouverte</span></div>
               </div>
-              <p className="text-xs text-slate-500 italic mt-2">💡 Astuce: Utilisez le menu de couches (en haut à droite de la carte) pour superposer les traces GPS de sportifs (Strava Heatmap) ou afficher la carte IGN !</p>
+              <p className="text-xs text-slate-500 italic mt-2">💡 Astuce: Utilisez le menu de couches en haut à droite pour superposer les traces GPS (Heatmap OSM) et voir par où les gens passent vraiment !</p>
             </div>
           )}
         </div>

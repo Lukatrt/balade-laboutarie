@@ -156,12 +156,12 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
           />
         </LayersControl.BaseLayer>
 
-        <LayersControl.Overlay name="Traces GPS Strava Heatmap">
+        <LayersControl.Overlay name="Traces GPS (Heatmap OSM)">
           <TileLayer
-            attribution='&copy; Strava'
-            url="https://heatmap-external-b.strava.com/tiles/run/bluered/{z}/{x}/{y}.png?px=256"
-            maxZoom={16}
-            opacity={0.6}
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png"
+            maxZoom={19}
+            opacity={0.8}
           />
         </LayersControl.Overlay>
       </LayersControl>
