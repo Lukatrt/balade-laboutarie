@@ -140,6 +140,14 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
           />
         </LayersControl.BaseLayer>
 
+        <LayersControl.BaseLayer name="Plan IGN V2 (Détaillé)">
+          <TileLayer
+            attribution='&copy; <a href="https://www.ign.fr/">IGN</a>'
+            url="https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}"
+            maxZoom={19}
+          />
+        </LayersControl.BaseLayer>
+
         <LayersControl.BaseLayer name="Satellite (Esri)">
           <TileLayer
             attribution='&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EAP, and the GIS User Community'
@@ -147,6 +155,15 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
             maxZoom={19}
           />
         </LayersControl.BaseLayer>
+
+        <LayersControl.Overlay name="Traces GPS Strava Heatmap">
+          <TileLayer
+            attribution='&copy; Strava'
+            url="https://heatmap-external-b.strava.com/tiles/run/bluered/{z}/{x}/{y}.png?px=256"
+            maxZoom={16}
+            opacity={0.6}
+          />
+        </LayersControl.Overlay>
       </LayersControl>
 
       {/* Start Marker */}
