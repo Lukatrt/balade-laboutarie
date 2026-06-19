@@ -61,16 +61,16 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
       style.color = '#9ca3af';
       style.dashArray = '5, 5';
     } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
-      // Differentiate official trails vs normal tracks
-      if (props.highway === 'path' && (props.sac_scale || props.trail_visibility)) {
-         // rough proxy for a more official path if it has sac_scale
+      if (props.highway === 'path' || props.highway === 'footway' || props.highway === 'pedestrian' || props.highway === 'steps') {
          style.color = '#ec4899'; // pinkish
-         style.weight = 4;
+         style.weight = 3;
       } else if (props.highway === 'track') {
          style.color = '#8b5cf6'; // purple
+         style.weight = 3;
          style.dashArray = '4, 4';
       } else {
          style.color = '#3b82f6'; // blue
+         style.weight = 2;
       }
     } else if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
       // Open areas
@@ -156,12 +156,12 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
           />
         </LayersControl.BaseLayer>
 
-        <LayersControl.Overlay name="Traces GPS (Heatmap OSM)">
+        <LayersControl.Overlay name="Itinéraires Balisés (GR/PR)">
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png"
-            maxZoom={19}
-            opacity={0.8}
+            attribution='&copy; <a href="https://hiking.waymarkedtrails.org">Waymarked Trails</a>'
+            url="https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"
+            maxZoom={18}
+            opacity={1.0}
           />
         </LayersControl.Overlay>
       </LayersControl>
