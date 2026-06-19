@@ -134,9 +134,10 @@ app.post('/api/overpass', async (req, res) => {
         out geom;
       `;
       
-      const response = await axios.post('https://overpass-api.de/api/interpreter', `data=${encodeURIComponent(query)}`, {
+      const response = await axios.post('https://overpass-api.de/api/interpreter', query, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'text/plain',
+          'User-Agent': 'BaladeLaboutarie/1.0 (laboutarie@example.com)'
         }
       });
       return response.data;
