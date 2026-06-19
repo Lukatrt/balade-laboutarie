@@ -1,13 +1,10 @@
 # Stage 1: Build the frontend
 FROM node:20-alpine AS frontend-builder
-WORKDIR /app
-# We only copy the frontend folder and build it
-COPY package*.json ./
-COPY frontend/package*.json ./frontend/
-# We use npm install on frontend directly
-RUN cd frontend && npm install
-COPY frontend/ ./frontend/
-RUN cd frontend && npm run build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
 
 # Stage 2: Build the backend and serve
 FROM node:20-alpine
