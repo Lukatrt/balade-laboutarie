@@ -23,6 +23,7 @@ const App: React.FC = () => {
   const [selectedFeature, setSelectedFeature] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [addressInput, setAddressInput] = useState("");
   
   const [favorites, setFavorites] = useState<string[]>(() => {
     const saved = localStorage.getItem('favorites');
@@ -35,6 +36,27 @@ const App: React.FC = () => {
 
   const toggleFavorite = (id: string) => {
     setFavorites(prev => prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]);
+  };
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!addressInput) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const geoData = await geocode(addressInput);
+      if (geoData && geoData.length > 0) {
+        const loc: [number, number] = [parseFloat(geoData[0].lat), parseFloat(geoData[0].lon)];
+        setCenter(loc);
+        loadInitialData(loc);
+      } else {
+        setError("Adresse introuvable.");
+        setLoading(false);
+      }
+    } catch (err) {
+      setError("Erreur de recherche.");
+      setLoading(false);
+    }
   };
 
   const loadInitialData = useCallback(async (startLocation: [number, number]) => {
@@ -175,6 +197,17 @@ const App: React.FC = () => {
         <div className="p-4 flex-1 overflow-y-auto space-y-6">
           {/* Controls */}
           <div className="space-y-4">
+            <form onSubmit={handleSearch} className="flex gap-2">
+              <input 
+                type="text" 
+                value={addressInput} 
+                onChange={(e) => setAddressInput(e.target.value)} 
+                placeholder="Nouvelle adresse (ex: Laboutarié)" 
+                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+              />
+              <button type="submit" className="px-3 py-2 bg-slate-800 text-white rounded-lg text-sm hover:bg-slate-700 transition-colors">Chercher</button>
+            </form>
+
             <button 
               onClick={handleLocateMe}
               className="w-full py-3 px-4 bg-emerald-50 text-emerald-700 font-medium rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-100 transition-colors"
@@ -184,8 +217,11 @@ const App: React.FC = () => {
             </button>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                <Car size={16} /> Temps de trajet (voiture)
+              <label className="text-sm font-semibold text-slate-700 flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <Car size={16} /> Distance max. en voiture depuis le départ
+                </div>
+                <span className="text-xs text-slate-500 font-normal">Filtre les tracés par temps de route. Ex: 10 min affichera seulement les tracés à moins de 10 minutes en voiture.</span>
               </label>
               <div className="flex bg-slate-100 rounded-lg p-1">
                 {[

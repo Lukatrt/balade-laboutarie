@@ -140,10 +140,10 @@ const Map: React.FC<MapProps> = ({ center, isochrones, features, showPrivate, on
           />
         </LayersControl.BaseLayer>
 
-        <LayersControl.BaseLayer name="IGN Orthophoto (Satellite)">
+        <LayersControl.BaseLayer name="Satellite (Esri)">
           <TileLayer
-            attribution='&copy; <a href="https://www.ign.fr/">IGN</a>'
-            url="https://wxs.ign.fr/choisirgeoportail/geoportail/wmts?service=WMTS&request=GetTile&version=1.0.0&tilematrixset=PM&tilematrix={z}&tilecol={x}&tilerow={y}&layer=ORTHOIMAGERY.ORTHOPHOTOS&format=image/jpeg&style=normal"
+            attribution='&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EAP, and the GIS User Community'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
             maxZoom={19}
           />
         </LayersControl.BaseLayer>
